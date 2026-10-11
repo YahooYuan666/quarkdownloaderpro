@@ -1,0 +1,24 @@
+# Node / 前端构建产物
+node_modules/
+frontend/dist/
+
+# Rust / Tauri 构建产物（工作区根 target/ + 旧位置的兜底）
+/target/
+src-tauri/target/
+src-tauri/gen/schemas/
+
+# 日志
+*.log
+
+# 本地环境与机密（Cookie 绝不入库）
+.env
+.env.*
+*.local
+
+# 系统 / 编辑器
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# 工具生成的忽略文件副本
+.zcodeignore

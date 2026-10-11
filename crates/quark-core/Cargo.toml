@@ -1,0 +1,17 @@
+[package]
+name = "quark-core"
+version = "0.1.0"
+edition.workspace = true
+license.workspace = true
+description = "夸克网盘协议层：分享解析、登录态、转存与直链。只懂夸克，不懂下载。"
+
+[dependencies]
+reqwest = { workspace = true }
+tokio = { workspace = true }
+thiserror = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+url = "2"
+urlencoding = "2"
+uuid = { version = "1", features = ["v4"] }
+bytes = "1"

@@ -1,0 +1,163 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+    font-family: "Noto Sans SC Local";
+    src: url("/fonts/Noto Sans SC.woff2") format("woff2");
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Source Han Sans SC Local";
+    src: url("/fonts/SourceHanSansSC-VF.otf.woff2") format("woff2");
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+/*
+ * 语义化设计令牌（单一来源）。
+ *
+ * 设计准则（低明度·防眩护眼·正常饱和度·对比拉开）：
+ * 1. 一律采用低/中低明度，坚决拒绝刺眼高光（浅色不使用死白纯白，深色不使用强反差霓虹与纯白字）；
+ * 2. 饱和度保持正常饱满（60%-80%），色彩浓郁纯正，告别发灰浑浊；
+ * 3. 各表面海拔与边界层层拉开：canvas < muted < card < raised < border，层次一目了然；
+ * 4. 正文与次要文字经严格验算全部满足 WCAG 2.1 AA/AAA 舒适可读。
+ */
+@layer base {
+    :root {
+        --font-ui: "Noto Sans SC Local", "Source Han Sans SC Local", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Segoe UI", sans-serif;
+        --font-display: "Noto Sans SC Local", "Source Han Sans SC Local", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Segoe UI", sans-serif;
+
+        /* 浅色阶梯（柔和纸感底，杜绝高亮死白；海拔：card > canvas > muted） */
+        --canvas: 216 18% 89%;       /* #DEE2E8 */
+        --card: 216 16% 94%;         /* #EDEFF2 */
+        --raised: 216 16% 94%;       /* #EDEFF2 */
+        --muted: 216 20% 85%;        /* #D1D7E0 */
+        --overlay: 216 16% 94%;
+
+        /* 文字：深沉墨灰与中灰，层次分明，温和耐看 */
+        --foreground: 218 30% 12%;   /* #151C27 */
+        --muted-foreground: 218 22% 32%; /* #404F64 */
+
+        /* 描边与交互控件 */
+        --border: 216 16% 78%;       /* #BFC7D3 */
+        --input: 216 18% 54%;        /* #77869B */
+
+        /* 强调色：低明度（L=38%）、正常饱满度（S=75%）深宝蓝 */
+        --primary: 218 75% 38%;      /* #1852A8 */
+        --primary-hover: 218 75% 32%;
+        --primary-foreground: 0 0% 100%;
+        --ring: 218 75% 38%;
+
+        /* 语义状态（正常饱满度，中低明度，浓郁不刺目） */
+        --success: 148 65% 32%;      /* #1C884E */
+        --warning: 36 85% 32%;       /* #975208 */
+        --danger: 352 70% 36%;       /* #9E1C2E */
+        --info: 210 70% 36%;         /* #1C599C */
+
+        /* 状态软底与文字对（文字在软底上对比度 ≥ 6.1:1） */
+        --success-soft: 148 25% 88%;
+        --success-on-soft: 148 70% 22%;
+        --warning-soft: 36 35% 88%;
+        --warning-on-soft: 36 85% 20%;
+        --danger-soft: 352 30% 89%;
+        --danger-on-soft: 352 75% 24%;
+        --info-soft: 210 30% 88%;
+        --info-on-soft: 210 75% 22%;
+
+        /* 悬浮 HUD（下载悬浮岛 / 进度小窗） */
+        --hud: 222 30% 12%;
+        --hud-foreground: 216 25% 88%;
+
+        --radius: 0.75rem;
+    }
+
+    .dark {
+        /* 深色阶梯（低明度防眩，阶梯分明：raised > card > muted > canvas） */
+        --canvas: 222 30% 9%;        /* #10141E (L=9%) */
+        --muted: 222 26% 13%;        /* #191E2A (L=13%) */
+        --card: 222 24% 18%;         /* #232939 (L=18%) */
+        --raised: 222 22% 24%;       /* #30384B (L=24%) */
+        --overlay: 222 24% 18%;
+
+        /* 文字：柔和雾感冷白（非刺眼纯白），对比度 10.8:1，久看不累 */
+        --foreground: 216 25% 88%;   /* #D6DEEA */
+        --muted-foreground: 216 18% 65%; /* #97A3B6 */
+
+        /* 描边与交互控件（界限清晰分明，层次立体） */
+        --border: 222 20% 32%;       /* #414B62 */
+        --input: 222 22% 46%;        /* #5E6D8A */
+
+        /* 强调色：低明度（L=44%）、饱满度正常（S=70%）纯正深蓝，防眩光 */
+        --primary: 220 70% 44%;      /* #2256BE */
+        --primary-hover: 220 70% 38%;/* #1D4AA4 */
+        --primary-foreground: 216 25% 95%; /* #EDF1F7 (5.93:1 对比度) */
+        --ring: 220 70% 44%;
+
+        /* 语义状态（饱满度正常 65%-80%，低明度 42%-46%，不刺眼不发灰） */
+        --success: 148 65% 42%;      /* #25B166 */
+        --warning: 36 80% 45%;       /* #CD7412 */
+        --danger: 352 70% 46%;       /* #C72942 */
+        --info: 210 70% 46%;         /* #2376C9 */
+
+        /* 状态软底与文字对（柔和微透，文字对比度 ≥ 6.6:1） */
+        --success-soft: 148 40% 12%;
+        --success-on-soft: 148 60% 68%;
+        --warning-soft: 36 40% 12%;
+        --warning-on-soft: 36 80% 68%;
+        --danger-soft: 352 40% 13%;
+        --danger-on-soft: 352 75% 72%;
+        --info-soft: 210 40% 13%;
+        --info-on-soft: 210 70% 70%;
+
+        --hud: 222 30% 9%;
+        --hud-foreground: 216 25% 88%;
+    }
+}
+
+@layer base {
+    html {
+        background-color: hsl(var(--canvas));
+        color: hsl(var(--foreground));
+    }
+
+    body {
+        @apply antialiased;
+        background-color: hsl(var(--canvas));
+        color: hsl(var(--foreground));
+        font-family: var(--font-ui);
+    }
+
+    /* 滚动条随主题，柔和精致 */
+    ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+        background: transparent;
+    }
+    ::-webkit-scrollbar-thumb {
+        background-color: hsl(var(--muted-foreground) / 0.28);
+        border-radius: 6px;
+        border: 2px solid transparent;
+        background-clip: content-box;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+        background-color: hsl(var(--muted-foreground) / 0.48);
+    }
+}
+
+@layer utilities {
+    /* 标题点睛文字：纯净克制，避免刺眼彩色渐变 */
+    .gradient-text {
+        color: hsl(var(--foreground));
+    }
+
+    .gradient-bg {
+        background-color: hsl(var(--primary));
+    }
+}

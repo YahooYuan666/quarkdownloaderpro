@@ -1,0 +1,18 @@
+[package]
+name = "download-engine"
+version = "0.1.0"
+edition.workspace = true
+license.workspace = true
+description = "通用 HTTP 分片下载引擎：重试、逐段校验、进度事件、任务级取消。不感知任何具体网盘。"
+
+[dependencies]
+reqwest = { workspace = true }
+tokio = { workspace = true }
+tokio-util = { workspace = true }
+thiserror = { workspace = true }
+uuid = { version = "1", features = ["v4"] }
+url = "2"
+serde = { workspace = true }
+
+[dev-dependencies]
+tokio = { workspace = true }
